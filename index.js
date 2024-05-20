@@ -11,11 +11,10 @@ const port = 3000;
 app.use(bodyParser.json());
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp-relay.sendinblue.com',
-  port: 587,
+  service: 'gmail',
   auth: {
-    user: 'chamoyavispa@chamoyavispa.com', // tu correo electrónico
-    pass: 'Gamezone123.' // la contraseña de aplicación generada
+    user: 'jlurquieta1@gmail.com', // tu correo electrónico
+    pass: 'hwqu eqii wibk gciv ' // la contraseña de aplicación generada
   }
 });
 
