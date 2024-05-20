@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
 // Función para enviar correo electrónico de agradecimiento
 function sendThankYouEmail(name, email) {
   const mailOptions = {
-    from: 'chamoyavispa@chamoyavispa.com',
+    from: email,
     to: email,
     subject: 'Gracias por ponerte en contacto',
     text: `Hola ${name},\n\nGracias por ponerte en contacto con nosotros. Tu mensaje ha sido recibido correctamente. Nos pondremos en contacto contigo lo antes posible.\n\nSaludos,\nEl equipo de ChamoyAvispa`
