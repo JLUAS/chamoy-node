@@ -52,11 +52,12 @@ app.post('/send-email-pedidos', (req, res) => {
       Información adicional: ${message}
     `
   };
-
+  sendThankYouEmail(name, email);
   // Envío del correo principal
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       res.status(500).send('Error enviando email');
+      sendThankYouEmail(name, email);
     } else {
       console.log('Email enviado:', info.response);
       // Envío del correo de agradecimiento
@@ -76,11 +77,12 @@ app.post('/send-email', (req, res) => {
     subject: `Contacto desde la página web - ${name}`,
     text: message
   };
-
+  sendThankYouEmail(name, email);
   // Envío del correo principal
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       res.status(500).send('Error enviando email');
+      sendThankYouEmail(name, email);
     } else {
       console.log('Email enviado:', info.response);
       // Envío del correo de agradecimiento
