@@ -20,14 +20,14 @@ const transporter = nodemailer.createTransport({
 
 // Función para enviar correo electrónico de agradecimiento
 function sendThankYouEmail(name, email) {
-  const mailOptions = {
-    from: email,
+  const mailOptions2 = {
+    from: 'chamoyavispa@chamoyavispa.com',
     to: email,
     subject: 'Gracias por ponerte en contacto',
     text: `Hola ${name},\n\nGracias por ponerte en contacto con nosotros. Tu mensaje ha sido recibido correctamente. Nos pondremos en contacto contigo lo antes posible.\n\nSaludos,\nEl equipo de ChamoyAvispa`
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
+  transporter.sendMail(mailOptions2, (error, info) => {
     if (error) {
       console.error('Error enviando correo de agradecimiento:', error);
     } else {
@@ -52,16 +52,29 @@ app.post('/send-email-pedidos', (req, res) => {
       Información adicional: ${message}
     `
   };
-  sendThankYouEmail(name, email);
+  const mailOptions2 = {
+    from: 'chamoyavispa@chamoyavispa.com',
+    to: email,
+    subject: 'Gracias por ponerte en contacto',
+    text: `Hola ${name},\n\nGracias por ponerte en contacto con nosotros. Tu mensaje ha sido recibido correctamente. Nos pondremos en contacto contigo lo antes posible.\n\nSaludos,\nEl equipo de ChamoyAvispa`
+  };
+
+  transporter.sendMail(mailOptions2, (error, info) => {
+    if (error) {
+      console.error('Error enviando correo de agradecimiento:', error);
+    } else {
+      console.log('Correo de agradecimiento enviado:', info.response);
+    }
+  });
   // Envío del correo principal
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       res.status(500).send('Error enviando email');
-      sendThankYouEmail(name, email);
+  
     } else {
       console.log('Email enviado:', info.response);
       // Envío del correo de agradecimiento
-      sendThankYouEmail(name, email);
+  
       res.status(200).send('Email enviado');
     }
   });
@@ -77,16 +90,29 @@ app.post('/send-email', (req, res) => {
     subject: `Contacto desde la página web - ${name}`,
     text: message
   };
-  sendThankYouEmail(name, email);
+  const mailOptions2 = {
+    from: 'chamoyavispa@chamoyavispa.com',
+    to: email,
+    subject: 'Gracias por ponerte en contacto',
+    text: `Hola ${name},\n\nGracias por ponerte en contacto con nosotros. Tu mensaje ha sido recibido correctamente. Nos pondremos en contacto contigo lo antes posible.\n\nSaludos,\nEl equipo de ChamoyAvispa`
+  };
+
+  transporter.sendMail(mailOptions2, (error, info) => {
+    if (error) {
+      console.error('Error enviando correo de agradecimiento:', error);
+    } else {
+      console.log('Correo de agradecimiento enviado:', info.response);
+    }
+  });
   // Envío del correo principal
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       res.status(500).send('Error enviando email');
-      sendThankYouEmail(name, email);
+  
     } else {
       console.log('Email enviado:', info.response);
       // Envío del correo de agradecimiento
-      sendThankYouEmail(name, email);
+  
       res.status(200).send('Email enviado');
     }
   });
