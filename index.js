@@ -18,6 +18,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+
 // Ruta para enviar formulario de pedidos
 app.post('/send-email-pedidos', (req, res) => {
   const { name, email, street, city, postalcode, state, telephone, message } = req.body;
