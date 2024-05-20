@@ -18,24 +18,6 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Función para enviar correo electrónico de agradecimiento
-function sendThankYouEmail(name, email) {
-  const mailOptions2 = {
-    from: 'chamoyavispa@chamoyavispa.com',
-    to: email,
-    subject: 'Gracias por ponerte en contacto',
-    text: `Hola ${name},\n\nGracias por ponerte en contacto con nosotros. Tu mensaje ha sido recibido correctamente. Nos pondremos en contacto contigo lo antes posible.\n\nSaludos,\nEl equipo de ChamoyAvispa`
-  };
-
-  transporter.sendMail(mailOptions2, (error, info) => {
-    if (error) {
-      console.error('Error enviando correo de agradecimiento:', error);
-    } else {
-      console.log('Correo de agradecimiento enviado:', info.response);
-    }
-  });
-}
-
 // Ruta para enviar formulario de pedidos
 app.post('/send-email-pedidos', (req, res) => {
   const { name, email, street, city, postalcode, state, telephone, message } = req.body;
