@@ -36,7 +36,6 @@ app.post('/send-email-pedidos', (req, res) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.error('Error enviando email:', error);
       res.status(500).send('Error enviando email');
     } else {
       console.log('Email enviado:', info.response);
@@ -57,7 +56,7 @@ app.post('/send-email', (req, res) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.error('Error enviando email:', error);
+      
       res.status(500).send('Error enviando email');
     } else {
       console.log('Email enviado:', info.response);
@@ -67,5 +66,5 @@ app.post('/send-email', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Hola`);
+  console.log(`hola`);
 });
