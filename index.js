@@ -18,6 +18,25 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+// Función para enviar correo electrónico de agradecimiento
+function sendThankYouEmail(name, email) {
+  const mailOptions = {
+    from: 'chamoyavispa@chamoyavispa.com',
+    to: email,
+    subject: 'Gracias por ponerte en contacto',
+    text: `Hola ${name},\n\nGracias por ponerte en contacto con nosotros. Tu mensaje ha sido recibido correctamente. Nos pondremos en contacto contigo lo antes posible.\n\nSaludos,\nEl equipo de ChamoyAvispa`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error enviando correo de agradecimiento:', error);
+    } else {
+      console.log('Correo de agradecimiento enviado:', info.response);
+    }
+  });
+}
+
+// Ruta para enviar formulario de pedidos
 app.post('/send-email-pedidos', (req, res) => {
   const { name, email, street, city, postalcode, state, telephone, message } = req.body;
 
@@ -34,16 +53,20 @@ app.post('/send-email-pedidos', (req, res) => {
     `
   };
 
+  // Envío del correo principal
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       res.status(500).send('Error enviando email');
     } else {
       console.log('Email enviado:', info.response);
+      // Envío del correo de agradecimiento
+      sendThankYouEmail(name, email);
       res.status(200).send('Email enviado');
     }
   });
 });
 
+// Ruta para enviar formulario de contacto
 app.post('/send-email', (req, res) => {
   const { name, email, message } = req.body;
 
@@ -54,17 +77,19 @@ app.post('/send-email', (req, res) => {
     text: message
   };
 
+  // Envío del correo principal
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      
       res.status(500).send('Error enviando email');
     } else {
       console.log('Email enviado:', info.response);
+      // Envío del correo de agradecimiento
+      sendThankYouEmail(name, email);
       res.status(200).send('Email enviado');
     }
   });
 });
 
 app.listen(port, () => {
-  console.log(`hola`);
+  console.log(`Servidor en funcionamiento en el puerto ${port}`);
 });
