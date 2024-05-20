@@ -39,7 +39,7 @@ app.post('/send-email-pedidos', (req, res) => {
     from: 'chamoyavispa@chamoyavispa.com',
     to: email,
     subject: 'Gracias por ponerte en contacto',
-    text: `Hola ${name},\n\nGracias por ponerte en contacto con nosotros. Tu mensaje ha sido recibido correctamente. Nos pondremos en contacto contigo lo antes posible.\n\nSaludos,\nEl equipo de ChamoyAvispa`
+    text: `Hola ${name},\n\nGracias por ponerte en contacto con nosotros. Tu mensaje ha sido recibido correctamente. Nos pondremos en contacto contigo lo antes posible.\n\nSaludos,\nEl equipo de Chamoy avispa`
   };
 
   transporter.sendMail(mailOptions2, (error, info) => {
