@@ -11,7 +11,8 @@ const port = 3000;
 app.use(bodyParser.json());
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp-relay.sendinblue.com',
+  port: 587,
   auth: {
     user: 'chamoyavispa@chamoyavispa.com', // tu correo electrónico
     pass: 'Gamezone123.' // la contraseña de aplicación generada
