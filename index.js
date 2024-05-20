@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
+const { nodemailer } = require('titan'); // Importa el módulo nodemailer de Titan
 
 const app = express();
 app.use(cors());
@@ -10,21 +10,23 @@ const port = 3000;
 
 app.use(bodyParser.json());
 
+// Configuración del transporte SMTP para utilizar los servidores de Titan
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.titan.email',
+  port: 587,
+  secure: false, // El puerto 587 no es seguro, establece a true si usas el puerto 465
   auth: {
-    user: 'jlurquieta1@gmail.com', // tu correo electrónico
-    pass: 'hwqu eqii wibk gciv ' // la contraseña de aplicación generada
+    user: 'chamoyavispa@chamoyavispa.com', // Tu dirección de correo electrónico de chamoyavispa@chamoyavispa.com
+    pass: 'Gamezone123.', // Tu contraseña de la cuenta de chamoyavispa@chamoyavispa.com
   }
 });
-
 
 // Ruta para enviar formulario de pedidos
 app.post('/send-email-pedidos', (req, res) => {
   const { name, email, street, city, postalcode, state, telephone, message } = req.body;
 
   const mailOptions = {
-    from: email,
+    from: 'chamoyavispa@chamoyavispa.com', // Cambia esto por tu dirección de correo electrónico de chamoyavispa@chamoyavispa.com
     to: 'chamoyavispa@chamoyavispa.com',
     subject: `Pedido de ${name}`,
     text: `
@@ -35,29 +37,13 @@ app.post('/send-email-pedidos', (req, res) => {
       Información adicional: ${message}
     `
   };
-  const mailOptions2 = {
-    from: 'chamoyavispa@chamoyavispa.com',
-    to: email,
-    subject: 'Gracias por ponerte en contacto',
-    text: `Hola ${name},\n\nGracias por ponerte en contacto con nosotros. Tu mensaje ha sido recibido correctamente. Nos pondremos en contacto contigo lo antes posible.\n\nSaludos,\nEl equipo de ChamoyAvispa`
-  };
 
-  transporter.sendMail(mailOptions2, (error, info) => {
-    if (error) {
-      console.error('Error enviando correo de agradecimiento:', error);
-    } else {
-      console.log('Correo de agradecimiento enviado:', info.response);
-    }
-  });
-  // Envío del correo principal
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
+      console.error('Error enviando email:', error);
       res.status(500).send('Error enviando email');
-  
     } else {
       console.log('Email enviado:', info.response);
-      // Envío del correo de agradecimiento
-  
       res.status(200).send('Email enviado');
     }
   });
@@ -68,34 +54,18 @@ app.post('/send-email', (req, res) => {
   const { name, email, message } = req.body;
 
   const mailOptions = {
-    from: email,
+    from: 'chamoyavispa@chamoyavispa.com', // Cambia esto por tu dirección de correo electrónico de chamoyavispa@chamoyavispa.com
     to: 'chamoyavispa@chamoyavispa.com',
     subject: `Contacto desde la página web - ${name}`,
     text: message
   };
-  const mailOptions2 = {
-    from: 'chamoyavispa@chamoyavispa.com',
-    to: email,
-    subject: 'Gracias por ponerte en contacto',
-    text: `Hola ${name},\n\nGracias por ponerte en contacto con nosotros. Tu mensaje ha sido recibido correctamente. Nos pondremos en contacto contigo lo antes posible.\n\nSaludos,\nEl equipo de ChamoyAvispa`
-  };
 
-  transporter.sendMail(mailOptions2, (error, info) => {
-    if (error) {
-      console.error('Error enviando correo de agradecimiento:', error);
-    } else {
-      console.log('Correo de agradecimiento enviado:', info.response);
-    }
-  });
-  // Envío del correo principal
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
+      console.error('Error enviando email:', error);
       res.status(500).send('Error enviando email');
-  
     } else {
       console.log('Email enviado:', info.response);
-      // Envío del correo de agradecimiento
-  
       res.status(200).send('Email enviado');
     }
   });
