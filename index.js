@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'jlurquieta1@gmail.com', // tu correo electrónico
-    pass: 'hwqu eqii wibk gciv ' // la contraseña de aplicación generada
+    user: 'chamoyavispa@chamoyavispa.com', // tu correo electrónico
+    pass: 'Gamezone123.' // la contraseña de aplicación generada
   }
 });
 
