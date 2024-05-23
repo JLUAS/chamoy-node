@@ -71,10 +71,11 @@ app.post('/send-email', (req, res) => {
     from: email,
     to: 'chamoyavispa@chamoyavispa.com',
     subject: `Contacto desde la página web - ${name}`,
-    text: {
-      'correo:'$email
-      message
-    }
+    text: `
+      Nombre: ${name}
+      Email: ${email}
+      Información: ${message}
+    `
   };
   const mailOptions2 = {
     from: 'chamoyavispa@chamoyavispa.com',
